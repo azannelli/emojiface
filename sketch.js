@@ -1,3 +1,4 @@
+
 let video;
 
 function setup() {
@@ -6,6 +7,23 @@ function setup() {
   video = createCapture(VIDEO);
   video.size(width, height);
   video.hide();
+}
+
+
+function colors(r,g,b) {
+  let c = [r,g,b];
+  const emojis = ["\uD83C\uDF11","\uD83D\uDE21","\uD83C\uDF4A","\uD83D\uDE42","\uD83C\uDF40","\uD83D\uDCA7","\uD83D\uDCAD"];
+  const colors = [[0,0,0],[255,0,0],[255,125,0],[255,255,0],[0,255,0],[0,0,255],[255,255,255]];
+  var difference = 1000;
+  var index = 0;
+  for (i = 0; i < colors.length; i++) {
+    var diff = Math.abs(c[0] - colors[i][0]) + Math.abs(c[1] - colors[i][1]) + Math.abs(c[2] - colors[i][2]);
+    if (diff < difference) {
+      var difference = diff;
+      var index = i;
+    }
+  }
+  return emojis[index];
 }
 
 function draw() {
@@ -20,10 +38,15 @@ function draw() {
       let r = video.pixels[index];
       let g = video.pixels[index+1];
       let b = video.pixels[index+2];
-
-      fill(r,g,b);
-      noStroke();
-      rect(x,y,gridSize,gridSize);
+      let emojitext = colors(r,g,b);
+      textSize(20);
+      if ((r >= b) && (r>=g)) {
+        text(emojitext,x,y);
+      } else if ((g > b) && (g > b)) {
+        text(emojitext,x,y);
+      } else {
+        text(emojitext,x,y);
+      }
     }
   }
 }
