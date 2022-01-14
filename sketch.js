@@ -9,15 +9,22 @@ function setup() {
   video.hide();
 }
 
-
 function colors(r,g,b) {
   let c = [r,g,b];
-  const emojis = ["\uD83D\uDDA4","\uD83D\uDE21","\uD83C\uDF4A","\uD83D\uDE42","\uD83C\uDF40","\uD83D\uDCA7","\uD83D\uDCAD","\uD83D\uDD90\uD83C\uDFFB","\uD83D\uDD90\uD83C\uDFFC","\uD83D\uDD90\uD83C\uDFFD", "\uD83D\uDD90\uD83C\uDFFE", "\uD83D\uDD90\uD83C\uDFFF"];
-  const colors = [[0,0,0],[255,0,0],[255,125,0],[255,255,0],[0,255,0],[0,0,255],[255,255,255],[247,215,196],[216,176,148],[187,145,103],[142,86,46],[97,61,48]];
-  var difference = 1000;
+  const emojis = ["\uD83D\uDDA4","\uD83D\uDE21","\uD83C\uDF4A","\uD83D\uDE42","\uD83C\uDF40",
+                  "\uD83D\uDCA7","\uD83D\uDCA7","\uD83D\uDCAD","\uD83D\uDD90\uD83C\uDFFB",
+                  "\uD83D\uDD90\uD83C\uDFFC","\uD83D\uDD90\uD83C\uDFFD",
+                  "\uD83D\uDD90\uD83C\uDFFE", "\uD83D\uDD90\uD83C\uDFFF"];
+  const colors = [[0,0,0],[255,0,0],[255,125,0],[255,255,0],[0,255,0],[0,0,150],[100,100,255],
+                  [255,255,255],[247,215,196],[216,176,148],[187,145,103],
+                  [142,86,46],[97,61,48]];
+  var difference = 100000;
   var index = 0;
   for (i = 0; i < colors.length; i++) {
-    var diff = Math.abs(c[0] - colors[i][0]) + Math.abs(c[1] - colors[i][1]) + Math.abs(c[2] - colors[i][2]);
+    var diff = 0;
+    diff += Math.pow(c[0] - colors[i][0],2);
+    diff += Math.pow(c[1] - colors[i][1],2);
+    diff += Math.pow(c[2] - colors[i][2],2);
     if (diff < difference) {
       var difference = diff;
       var index = i;
